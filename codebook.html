@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 4.4.3.2 (Windows)"/>
+	<meta name="created" content="2015-05-24T15:28:08.610000000"/>
+	<meta name="changed" content="2015-05-24T15:29:22.427000000"/>
+	<style type="text/css">
+		@page { margin: 0.79in }
+		p { margin-bottom: 0.1in; line-height: 120% }
+		a:link { so-language: zxx }
+	</style>
+</head>
+<body lang="en-US" dir="ltr">
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+# <b>Code Book</b></p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+This document describes the code inside `run_analysis.R`.</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Ref:
+JT Leek &ldquo;The code book&rdquo; Source:
+<a href="https://github.com/jtleek/datasharing">https://github.com/jtleek/datasharing</a></span></span></span></p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+##Before you begin</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+Source the raw files. 
+</p>
+<p><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">You
+should have downloaded the Samsung_Dataset found here
+<a href="https://github.com/Leptokurtic/Tidying-Data">https://github.com/Leptokurtic/Tidying-Data</a></span></span></span></p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+Placed it in your working directory</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+<br/>
+<br/>
+
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+##<u>Step 1: </u>
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+from the local &ldquo;Samsung_Dataset/*&quot; sub directory in your
+parent working directory run_analysis.R</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+###/train/*</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+Reads train files:  
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+X_train.txt | y_train.txt | subject_train.txt 
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+into memory as object names:  
+</p>
+<p style="font-style: normal; font-weight: normal; text-decoration: none">
+train_Data | train.Label | train.Subject</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###/test/*</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Reads
+test files :  </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">X_test.txt
+|  y_test.txt | subject_test.txt</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">into
+memory as object names: </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">test_Data
+| test.Label | test.Subject</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###Merging
+train and test files </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">[
+X+X, y+y, subject+subject] as:  </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">join_Dataset
+| join.Lab | join.Subject</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">##Step
+2:  Extracts only the measurements on the mean and standard deviation
+for each measurement. </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###
+run_analysis.R Concatenates measurements</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">test_Data
+&rarr; train_Data &rarr;= join_Dataset</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Creating
+data.frame Of dimension:  10299x561</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">test.Subject
+&rarr;train.Subject &rarr;=  join.Subject</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Creating
+data.frame Of dimension:    10299x1 </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">test.Label&rarr;train.Label
+&rarr;=  join.Lab</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Creating
+data.frame Of dimension:  10299x1</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###
+From the local &ldquo;Samsung_Dataset/*&quot; sub directory in your
+parent working directory </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">####run_analysis.R
+Reads file(s):</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">features.txt
+</span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">into
+memory as object name(s): </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">features</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###
+Extracts the mean and standard deviation:</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">&gt;mean.std_Indices
+&lt;- grep(&quot;mean\\(\\)|std\\(\\)&quot;, features[, 2])</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">for
+each accordingly:</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">&gt;names(join_Dataset)
+&lt;- gsub(&quot;\\(\\)&quot;, &quot;&quot;,
+features[mean.std_Indices, 2])</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">####Cleans
+up formatting of feature names to Uppercase</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">##
+Step 3: run_analysis.R pairs descriptive activity names with the
+activities in the data set</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###
+From the local &ldquo;Samsung_Dataset/*&quot; sub directory in your
+parent working directory</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">####run_analysis.R
+Reads file(s):</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">activity_labels.txt</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">into
+memory as object name(s): </span></span></span></em>
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">activity</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###Cleans
+the activity name</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Formats
+to all lower case removing errant punctuation in activity names and
+formatting to uppercase where necessary </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">###transposes
+join.Lab with activity name data frame vector </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">:
+run_analysis.R annotates descriptive activity names to name the
+activities in the data set</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">##
+Step 4 Assembles join.subject, join.Lab, join_Dataset to data.frame:
+Cleaned_Data then writes this data to &ldquo;./joined_dataset.txt&rdquo;.
+Allows user option to unprotect [-#] writing to a dually named .csv
+file as well</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">##Step
+5:  run_analysis.R takes the data set Cleaned_Data from step 4, and
+creates a second, independent tidy data set 
+&quot;tidy_dataset_Bymeans.txt&quot; with the average of each
+variable for each activity and each subject.</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">subject.Length:
+calculates neccessary length of resulting data.frame</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">col.Length:
+calculates neccessary width of resulting data.frame</span></span></span></em></p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">tidying_Dataset:
+ fits its dimensions as matrix_1 | overwrites matrix as data.frame _2
+| stores iterations to completion post post for loop to write output
+file: &ldquo;tidy_dataset_Bymeans.txt&rdquo; and again user has the
+option to unprotect [-#] codeline writing it to dually names .csv
+file. </span></span></span></em>
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Script
+offered open source by  Leptokurtic  @https://github.com/Leptokurtic</span></span></span></em></p>
+<p><br/>
+<br/>
+
+</p>
+<p><em><span style="font-style: normal"><span style="text-decoration: none"><span style="font-weight: normal">Thank
+you and enjoy!</span></span></span></em></p>
+</body>
+</html>
