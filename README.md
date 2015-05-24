@@ -5,7 +5,7 @@ Getting and Cleaning Data Course Project
 
 =================================================================================================
 
-This file describes how run_analysis.R script works.
+This file describes the function of the run_analysis.R script.
 
 run_analysis.R is a script for tidying the Samsung smartphone datasets in preperation for working working with them. 
 
